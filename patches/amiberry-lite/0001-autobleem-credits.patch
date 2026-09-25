@@ -1,0 +1,10 @@
+--- a/src/osdep/gui/PanelAbout.cpp
++++ b/src/osdep/gui/PanelAbout.cpp
+@@ -39,6 +39,7 @@
+ 		"along with this program. If not, see https://www.gnu.org/licenses\n\n"
+ 
+ 		"Credits:\n"
++		"Artur Jakubowicz (screemer) - PlayStation Classic port and the AutoBleem App\n"
+ 		"Dimitris Panokostas (MiDWaN) - Amiberry author\n"
+ 		"Toni Wilen - WinUAE author\n"
+ 		"TomB - Original ARM port of UAE, JIT ARM updates\n"

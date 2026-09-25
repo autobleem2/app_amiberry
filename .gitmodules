@@ -1,0 +1,15 @@
+[submodule "upstream/amiberry-lite"]
+	path = upstream/amiberry-lite
+	url = https://github.com/BlitterStudio/amiberry-lite.git
+[submodule "upstream/zlib"]
+	path = upstream/zlib
+	url = https://github.com/madler/zlib.git
+[submodule "upstream/libpng"]
+	path = upstream/libpng
+	url = https://github.com/pnggroup/libpng.git
+[submodule "upstream/flac"]
+	path = upstream/flac
+	url = https://github.com/xiph/flac.git
+[submodule "upstream/zstd"]
+	path = upstream/zstd
+	url = https://github.com/facebook/zstd.git

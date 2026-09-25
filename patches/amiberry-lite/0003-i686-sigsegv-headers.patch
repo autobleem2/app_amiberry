@@ -1,0 +1,13 @@
+--- a/src/osdep/sigsegv_handler.cpp
++++ b/src/osdep/sigsegv_handler.cpp
+@@ -36,7 +36,9 @@
+ #endif
+ #include "uae.h"
+ 
+-#if !defined(__MACH__) && !defined(CPU_AMD64) && !defined(__x86_64__) && !defined(__riscv) && !defined(__FreeBSD__)
++// AutoBleem: 32-bit x86 (the PC stick) takes the ucontext header as x86_64 does - asm/sigcontext.h here is
++// the 32-bit ARM builds' and clashes with signal.h on i686
++#if !defined(__MACH__) && !defined(CPU_AMD64) && !defined(__x86_64__) && !defined(__i386__) && !defined(__riscv) && !defined(__FreeBSD__)
+ #include <asm/sigcontext.h>
+ #else
+ #include <sys/ucontext.h>

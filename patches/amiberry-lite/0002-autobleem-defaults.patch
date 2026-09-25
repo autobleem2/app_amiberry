@@ -1,0 +1,62 @@
+--- a/src/include/options.h
++++ b/src/include/options.h
+@@ -1311,7 +1311,7 @@
+ 	int default_line_mode = 0;
+ 	int input_default_mouse_speed = 100;
+ 	bool input_keyboard_as_joystick_stop_keypresses = false;
+-	char default_open_gui_key[128] = "F12";
++	char default_open_gui_key[128] = "back"; // AutoBleem: Select (the keyboard keeps F12)
+ 	char default_quit_key[128]{};
+ 	char default_ar_key[128] = "Pause";
+ 	char default_fullscreen_toggle_key[128]{};
+@@ -1325,7 +1325,7 @@
+ 	bool default_auto_crop = false;
+ 	int default_width = 720;
+ 	int default_height = 568;
+-	int default_fullscreen_mode = 0;
++	int default_fullscreen_mode = 2; // AutoBleem: full-window - an App has the whole screen
+ 	int default_stereo_separation = 7;
+ 	int default_sound_buffer = 8192;
+ 	bool default_sound_pull = true;
+--- a/src/osdep/gui/main_window.cpp
++++ b/src/osdep/gui/main_window.cpp
+@@ -295,7 +295,8 @@
+ 		regqueryint(nullptr, _T("GUIPosY"), &gui_window_rect.y);
+ 
+         Uint32 mode;
+-		if (!kmsdrm_detected)
++		// AutoBleem: every machine the App runs on is an appliance - the GUI takes the whole screen
++		if (false)
+ 		{
+ 			// Only enable Windowed mode if we're running under x11
+ 			mode = SDL_WINDOW_RESIZABLE;
+--- a/src/osdep/amiberry_input.cpp
++++ b/src/osdep/amiberry_input.cpp
+@@ -1847,9 +1847,9 @@
+ 	// Only applies for normal joysticks, as CD32 pads will use these buttons already
+ 	if (mode < JSEM_MODE_JOYSTICK_CD32)
+ 	{
+-		// Key P: commonly used for Pause in many games => START
++		// AutoBleem (the 2019 PlayStation Classic layout): START swaps the joystick ports
+ 		if (!button_map[0][SDL_CONTROLLER_BUTTON_START])
+-			setid(uid, i, ID_BUTTON_OFFSET + SDL_CONTROLLER_BUTTON_START, 0, port, INPUTEVENT_KEY_P, gp);
++			setid(uid, i, ID_BUTTON_OFFSET + SDL_CONTROLLER_BUTTON_START, 0, port, INPUTEVENT_SPC_SWAPJOYPORTS, gp);
+ 
+ 		// Mouse map uses these already, so we skip them if that's enabled
+ 		if (currprefs.jports[port].mousemap == 0)
+@@ -1861,6 +1861,15 @@
+ 			// Return => RShoulder
+ 			if (!button_map[0][SDL_CONTROLLER_BUTTON_RIGHTSHOULDER])
+ 				setid(uid, i, ID_BUTTON_OFFSET + SDL_CONTROLLER_BUTTON_RIGHTSHOULDER, 0, port, INPUTEVENT_KEY_RETURN, gp);
++
++			// AutoBleem (the 2019 PlayStation Classic layout): Circle Return, Square Space, Triangle the
++			// left mouse button
++			if (!button_map[0][SDL_CONTROLLER_BUTTON_B])
++				setid(uid, i, ID_BUTTON_OFFSET + SDL_CONTROLLER_BUTTON_B, 0, port, INPUTEVENT_KEY_RETURN, gp);
++			if (!button_map[0][SDL_CONTROLLER_BUTTON_X])
++				setid(uid, i, ID_BUTTON_OFFSET + SDL_CONTROLLER_BUTTON_X, 0, port, INPUTEVENT_KEY_SPACE, gp);
++			if (!button_map[0][SDL_CONTROLLER_BUTTON_Y])
++				setid(uid, i, ID_BUTTON_OFFSET + SDL_CONTROLLER_BUTTON_Y, 0, port, INPUTEVENT_JOY1_FIRE_BUTTON, gp);
+ 		}
+ 	}
+ 
