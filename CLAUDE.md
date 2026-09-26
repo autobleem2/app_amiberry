@@ -16,10 +16,14 @@ over; its icon (the Amiga checkmark - a trademark) did not.
   (Weston 1.11 offers only `wl_shell`, which SDL3 has no window for - the same ceiling that keeps the launcher at
   SDL 2.0.14). Amiberry-Lite is upstream's SDL2 line for low-end machines, **Linux-only**; Windows users have
   WinUAE. An exception to "every target" - the owner's call. Upstream: `BlitterStudio/amiberry-lite` at
-  **`v5.9.3`**, the package version `5.9.3-1` (`VERSION`).
+  **`v5.9.3`**, the package version `5.9.3-2` (`VERSION`).
 - **Data**: AROS (the built-in replacement Kickstart, `roms/aros-*.bin`) and WHDLoad (`whdboot/`) - what
   upstream ships. No Kickstarts, no games; the readme says where the user's own go.
-- **Start in Amiberry's GUI** (its Quickstart page), driven with the pad.
+- **Start in Amiberry's GUI** (its Quickstart page), driven with the pad. Its menu (`main_window.cpp`) takes a
+  step on a hat event *and* on a LEFTX/LEFTY axis event, so the virtual pad's default `movement = both` (the D-pad
+  also moves the left stick) made every D-pad press two steps: `pad.ini` sets `movement = as-is` (5.9.3-2, tested
+  on the console 2026-09-26; the Amiga joystick reads the D-pad too). 5.9.3-1's 5-8 steps per press were the
+  console's SDL 2.0.4 - launcher nightly 157's `app_env.sh` - not Amiberry.
 - **The 2019 pad layout**: D-pad joystick, Cross fire, Circle Return, Square Space, Triangle the left mouse
   button, Start swaps the joystick ports, Select the GUI; L1/R1 keep upstream's Space/Return.
 - **Our branding**: the About panel's logo with the AutoBleem logo in its corner, and a credits line.
@@ -34,7 +38,7 @@ over; its icon (the Amiga checkmark - a trademark) did not.
 | `patches/amiberry-lite/0002-autobleem-defaults.patch` | `options.h`: Select (`back`) opens the GUI (a keyboard keeps F12), the emulation full-window; `main_window.cpp`: the GUI full-window everywhere, not only under KMSDRM; `amiberry_input.cpp`: the 2019 buttons in the "extra default mappings" block - plain joystick mode only, and only where the config has no custom mapping (CD32 and mouse modes stay upstream's) |
 | `patches/amiberry-lite/0003-i686-sigsegv-headers.patch` | 32-bit x86 (the PC stick) takes `<sys/ucontext.h>` as x86_64 does; upstream sends it to 32-bit ARM's `<asm/sigcontext.h>`, which clashes with `<signal.h>` there |
 | `resources/psc/glibc_compat.{h,c}` | the console build's compat for gcc-12 against glibc 2.24 (below) |
-| `resources/app/` | `app.ini` (`Exec=bin/{key}/amiberry-lite`, `VirtualPad=true`, no `Args`/`Lib`), `readme.txt`, `icon.png` |
+| `resources/app/` | `app.ini` (`Exec=bin/{key}/amiberry-lite`, `VirtualPad=true`, no `Args`/`Lib`), `readme.txt`, `icon.png`, `pad.ini` (`movement = as-is` - see below) |
 | `resources/branding/` | `amiberry-logo.png` (the About panel's, copied over `data/`), drawn by `tools/make_branding.py` from Amiberry's logo and `autobleem-logo.png` (the launcher's `ablogo.png`) |
 | `ci/build.sh` | `native|psc|rpi|rpi64|pcusb|all`: per target the libraries into `build_<key>/deps` (kept while `deps/.stamp` matches), then a copy of Amiberry, the patches, upstream's CMake with serial/MIDI/libmpeg2/enet/mpg123/pcap off, zstd on; stages the portable App folder and checks it |
 | `tools/store_item.py`, `tools/check_psc_binary.sh`, `tools/check_needed.sh`, `tools/zip_app.py` | as in the other ports; `check_needed.sh` also checks `plugins/*.so` |

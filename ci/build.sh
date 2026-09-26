@@ -200,7 +200,7 @@ build_amiberry() { # build_amiberry <key>
     mkdir -p "$stage/conf" "$stage/floppies" "$stage/lha" "$stage/harddrives" "$stage/savestates" \
         "$stage/screenshots"
     : > "$stage/amiberry.portable"
-    cp resources/app/app.ini resources/app/readme.txt resources/app/icon.png "$stage/"
+    cp resources/app/app.ini resources/app/readme.txt resources/app/icon.png resources/app/pad.ini "$stage/"
     sed -i "s/^Version=.*/Version=$VERSION/" "$stage/app.ini"
     cp "$dir/src/LICENSE" "$stage/LICENSE-amiberry.txt"
     cp "$dir/src/external/capsimage/LICENCE.txt" "$stage/licences/capsimage.txt"
