@@ -77,4 +77,5 @@ over; its icon (the Amiga checkmark - a trademark) did not.
   image, `autobleem-build:latest`); `master` follows the released commit. The Store gets it by hand:
   `gh release download <tag>`, `tools/store_item.py` per zip, then autobleem-repo's
   `repo_publish.sh store <key> dist/store/<key>/*` - psc, rpi, rpi64, pcusb.
-- **Not yet run**: on a console, a Pi or the PC stick (the tester checklist, section 12).
+- **Run on the owner's console** (2026-09-26, 5.9.3-2: the menu, one step per D-pad press); not yet on a Pi or the PC
+  stick (the tester checklist, section 12).
