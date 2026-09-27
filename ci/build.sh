@@ -238,13 +238,15 @@ check() { # check <key>: the program and its plugins are the platform's and need
         psc)
             file "$stage/bin/psc/$PROGRAM" | grep -q 'ELF 32-bit LSB.*ARM'
             for f in "$stage/bin/psc/$PROGRAM" "$stage"/plugins/*.so*; do
-                [ -f "$f" ] && bash tools/check_psc_binary.sh "$f" "$PSC"
+                [ -f "$f" ] && bash /opt/ab/tools/check_psc_binary.sh "$f" "$PSC"
             done ;;
         rpi) file "$stage/bin/rpi/$PROGRAM" | grep -q 'ELF 32-bit LSB.*ARM' ;;
         rpi64) file "$stage/bin/rpi64/$PROGRAM" | grep -q 'ELF 64-bit LSB.*aarch64' ;;
         pcusb) file "$stage/bin/pcusb/$PROGRAM" | grep -q 'ELF 32-bit LSB.*Intel 80386' ;;
     esac
-    bash tools/check_needed.sh "$key" "$stage"
+    # the plugins glob as the 3rd argument (APPS-6): check_needed.sh only walks bin/<key>/ and lib/<key>/
+    # on its own, and Amiberry's plugins live in their own plugins/ folder outside both
+    bash /opt/ab/tools/check_needed.sh "$key" "$stage" "$stage/plugins/*.so*"
 }
 
 build_one() { # build_one <key>
