@@ -74,7 +74,7 @@ over; its icon (the Amiga checkmark - a trademark) did not.
 - **Build on the server**: sync with MSYS2's rsync (excluding `/build_*`, `/dist`), then
   `docker run --rm -u $(id -u):$(id -g) -v $PWD:/src -w /src ghcr.io/autobleem2/autobleem-build:develop ci/build.sh all`;
   remove `build_*`/`dist` there afterwards.
-- **Releases**: a `v<version>` tag (`v5.9.3-1`) builds a stable GitHub release with the four zips (in the release
+- **Releases**: a `v<version>` tag (`v5.9.3-2`) builds a stable GitHub release with the four zips (in the release
   image, `autobleem-build:latest`); `master` follows the released commit. The Store gets it by hand:
   `gh release download <tag>`, `tools/store_item.py` per zip, then autobleem-repo's
   `repo_publish.sh store <key> dist/store/<key>/*` - psc, rpi, rpi64, pcusb.
