@@ -41,7 +41,8 @@ over; its icon (the Amiga checkmark - a trademark) did not.
 | `resources/app/` | `app.ini` (`Exec=bin/{key}/amiberry-lite`, `VirtualPad=true`, no `Args`/`Lib`), `readme.txt`, `icon.png`, `pad.ini` (`movement = as-is` - see below) |
 | `resources/branding/` | `amiberry-logo.png` (the About panel's, copied over `data/`), drawn by `tools/make_branding.py` from Amiberry's logo and `autobleem-logo.png` (the launcher's `ablogo.png`) |
 | `ci/build.sh` | `native|psc|rpi|rpi64|pcusb|all`: per target the libraries into `build_<key>/deps` (kept while `deps/.stamp` matches), then a copy of Amiberry, the patches, upstream's CMake with serial/MIDI/libmpeg2/enet/mpg123/pcap off, zstd on; stages the portable App folder and checks it |
-| `tools/store_item.py`, `tools/check_psc_binary.sh`, `tools/check_needed.sh`, `tools/zip_app.py` | as in the other ports; `check_needed.sh` also checks `plugins/*.so` |
+| `tools/store_item.py`, `tools/zip_app.py` | as in the other ports |
+| `/opt/ab/tools/check_psc_binary.sh`, `/opt/ab/tools/check_needed.sh` (autobleem-build image) | no longer vendored (APPS-6) - as in the other ports; `check_needed.sh` is passed `plugins/*.so*` as its 3rd argument to also check the plugins |
 
 ## Things to know
 
