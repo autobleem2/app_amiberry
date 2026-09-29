@@ -14,7 +14,7 @@ over; its icon (the Amiga checkmark - a trademark) did not.
 
 - **Amiberry-Lite, no Windows.** The current Amiberry (8.x) is built on **SDL3**, which the console cannot run
   (Weston 1.11 offers only `wl_shell`, which SDL3 has no window for - the same ceiling that keeps the launcher at
-  SDL 2.0.14). Amiberry-Lite is upstream's SDL2 line for low-end machines, **Linux-only**; Windows users have
+  SDL 2.0.18, our own `autobleem_sdl`, was upstream 2.0.14 until 2026-09-29). Amiberry-Lite is upstream's SDL2 line for low-end machines, **Linux-only**; Windows users have
   WinUAE. An exception to "every target" - the owner's call. Upstream: `BlitterStudio/amiberry-lite` at
   **`v5.9.3`**, the package version `5.9.3-2` (`VERSION`).
 - **Data**: AROS (the built-in replacement Kickstart, `roms/aros-*.bin`) and WHDLoad (`whdboot/`) - what
